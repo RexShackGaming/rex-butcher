@@ -679,7 +679,7 @@ Config.Animal = {
         rewarditem3 = nil
     },
     {
-        name        = 'Legendary Moon Beaver',
+        name        = 'Legendary Beaver',
         model       = -1149999295,
         rewardmoney = 100,
         rewarditem1 = 'raw_meat',
@@ -687,7 +687,7 @@ Config.Animal = {
         rewarditem3 = nil
     },
     {
-        name        = 'Legendary Maza Cougar',
+        name        = 'Legendary Cougar',
         model       = -1433814131,
         rewardmoney = 100,
         rewarditem1 = 'raw_meat',
@@ -695,7 +695,7 @@ Config.Animal = {
         rewarditem3 = nil
     },
     {
-        name        = 'Legendary Midnight Paw Coyote',
+        name        = 'Legendary Coyote',
         model       = -1307757043,
         rewardmoney = 100,
         rewarditem1 = 'raw_meat',
@@ -703,7 +703,7 @@ Config.Animal = {
         rewarditem3 = nil
     },
     {
-        name        = 'Legendary Ghost Panther',
+        name        = 'Legendary Panther',
         model       = -1189368951,
         rewardmoney = 100,
         rewarditem1 = 'raw_meat',
@@ -711,7 +711,7 @@ Config.Animal = {
         rewarditem3 = nil
     },
     {
-        name        = 'Legendary Onyx Wolf',
+        name        = 'Legendary Wolf',
         model       = -1392359921,
         rewardmoney = 100,
         rewarditem1 = 'raw_meat',
