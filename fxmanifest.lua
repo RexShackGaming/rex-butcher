@@ -2,12 +2,15 @@ fx_version 'cerulean'
 rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 game 'rdr3'
 
-description 'rex-butcher'
-version '2.0.6'
+name 'rex-butcher'
+author 'RexShackGaming'
+description 'Advanced butcher system for RSG Framework'
+version '2.1.0'
+url 'https://discord.gg/YUV7ebzkqs'
 
 shared_scripts {
     '@ox_lib/init.lua',
-    'config.lua',
+    'shared/config.lua',
 }
 
 client_scripts {
@@ -23,6 +26,7 @@ server_scripts {
 dependencies {
     'rsg-core',
     'ox_lib',
+    'ox_target',
 }
 
 files {
@@ -30,5 +34,12 @@ files {
 }
 
 this_is_a_map 'yes'
+
+escrow_ignore {
+    'installation/*',
+    'locales/*',
+    'shared/*',
+    'README.md'
+}
 
 lua54 'yes'

@@ -1,5 +1,3 @@
-Config = {}
-
 ---------------------------------
 -- shop settings
 ---------------------------------
@@ -20,6 +18,31 @@ Config.GoodMultiplier = 2
 Config.PerfectMultiplier = 3
 Config.KeyBind = 'J'
 Config.EnableTarget = true
+
+---------------------------------
+-- performance settings
+---------------------------------
+Config.Performance = {
+    -- NPC Management
+    NpcDistanceCheck = 3000,        -- How often to check NPC distances (ms)
+    NpcCoordsUpdate = 2000,         -- How often to update player coords for NPCs (ms)
+    NpcSpawnDistance = 20.0,        -- Distance to spawn/despawn NPCs
+    NpcFadeSpeed = 40,              -- Fade animation speed (ms between steps)
+    
+    -- Client Performance
+    ProcessCooldown = 1000,         -- Cooldown between animal processing (ms)
+    BlipUpdateInterval = 5000,      -- How often to check blip states (ms)
+    CacheSize = 500,                -- Maximum cached animals in lookup
+    
+    -- Server Performance
+    ServerProcessCooldown = 2000,   -- Server-side processing cooldown per player (ms)
+    MaxConcurrentRewards = 10,      -- Maximum concurrent reward processing
+    LoggingEnabled = true,          -- Enable transaction logging
+    
+    -- Memory Management
+    CleanupInterval = 300000,       -- Cleanup unused data every 5 minutes
+    MaxPlayerCooldowns = 100,       -- Maximum player cooldown entries to keep
+}
 
 ---------------------------------
 -- webhook settings
@@ -428,7 +451,9 @@ Config.Animal = {
         name        = 'American Pronghorn Doe',
         model       = 1755643085,
         rewardmoney = 1,
-        rewarditem  = 'raw_meat'
+        rewarditem1 = 'raw_meat',
+        rewarditem2 = nil,
+        rewarditem3 = nil
     },
     {
         name        = 'Greater Prairie Chicken',
