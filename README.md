@@ -1,8 +1,6 @@
-# Rex Butcher - Advanced RSG Framework Butcher System
+<img width="2948" height="497" alt="rex_scripts" src="https://github.com/user-attachments/assets/bccc94d2-0702-48aa-9868-08b05cc2a8bd" />
 
-![Version](https://img.shields.io/badge/version-2.1.0-blue.svg)
-![Framework](https://img.shields.io/badge/framework-RSG--Core-green.svg)
-![License](https://img.shields.io/badge/license-Escrow-red.svg)
+# Rex Butcher - Advanced RSG Framework Butcher System
 
 ## 📖 Description
 
