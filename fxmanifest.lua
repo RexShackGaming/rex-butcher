@@ -5,7 +5,7 @@ game 'rdr3'
 name 'rex-butcher'
 author 'RexShackGaming'
 description 'Advanced butcher system for RSG Framework'
-version '2.1.0'
+version '2.1.1'
 url 'https://discord.gg/YUV7ebzkqs'
 
 shared_scripts {

@@ -8,41 +8,27 @@ local LocaleCache = {}
 local LastProcessedTime = 0
 local ProcessCooldown = Config.Performance and Config.Performance.ProcessCooldown or 1000
 
--- Initialize locale cache with safe error handling
+-- Initialize locale cache using direct JSON loading
 CreateThread(function()
-    local locale_func = nil
+    -- Load locale strings from JSON file
+    local localeData = nil
+    local success, result = pcall(json.decode, LoadResourceFile(GetCurrentResourceName(), 'locales/en.json'))
     
-    -- Try to get locale function safely
-    if lib and lib.locale then
-        local success, result = pcall(lib.locale)
-        if success and type(result) == 'function' then
-            locale_func = result
-        end
-    end
-    
-    -- Load locale strings or use fallbacks
-    if locale_func then
-        local localeKeys = {
-            {key = 'cl_lang_1', fallback = 'Open '},
-            {key = 'cl_lang_5', fallback = 'Butcher Shop'},
-            {key = 'cl_lang_6', fallback = 'Sell Animal'},
-            {key = 'cl_lang_7', fallback = 'sell your animal'},
-            {key = 'cl_lang_8', fallback = 'Open Shop'},
-            {key = 'cl_lang_9', fallback = 'buy items from the butcher'},
-            {key = 'cl_lang_10', fallback = 'Not Holding Animal'},
-            {key = 'cl_lang_11', fallback = "don't have an animal on you"},
-            {key = 'cl_lang_12', fallback = 'Selling '},
-            {key = 'cl_lang_13', fallback = 'Selling Failed!'}
-        }
-        
-        for _, locale in ipairs(localeKeys) do
-            local success, result = pcall(locale_func, locale.key)
-            local cacheKey = locale.key:gsub('cl_', ''):gsub('_', '_')
-            LocaleCache['lang_' .. cacheKey:match('%d+')] = (success and result) or locale.fallback
-        end
+    if success and result then
+        localeData = result
+        LocaleCache.lang_1 = localeData['cl_lang_1'] or 'Open '
+        LocaleCache.lang_5 = localeData['cl_lang_5'] or 'Butcher Shop'
+        LocaleCache.lang_6 = localeData['cl_lang_6'] or 'Sell Animal'
+        LocaleCache.lang_7 = localeData['cl_lang_7'] or 'sell your animal'
+        LocaleCache.lang_8 = localeData['cl_lang_8'] or 'Open Shop'
+        LocaleCache.lang_9 = localeData['cl_lang_9'] or 'buy items from the butcher'
+        LocaleCache.lang_10 = localeData['cl_lang_10'] or 'Not Holding Animal'
+        LocaleCache.lang_11 = localeData['cl_lang_11'] or "don't have an animal on you"
+        LocaleCache.lang_12 = localeData['cl_lang_12'] or 'Selling '
+        LocaleCache.lang_13 = localeData['cl_lang_13'] or 'Selling Failed!'
         
         if Config.Debug then
-            print('[rex-butcher] Client locale strings loaded successfully')
+            print('[rex-butcher] Client locale strings loaded successfully from en.json')
         end
     else
         -- Fallback locale strings
@@ -58,7 +44,7 @@ CreateThread(function()
         LocaleCache.lang_13 = 'Selling Failed!'
         
         if Config.Debug then
-            print('[rex-butcher] Client locale system not available, using fallback strings')
+            print('[rex-butcher] Client: Could not load locale file, using fallback strings')
         end
     end
 end)

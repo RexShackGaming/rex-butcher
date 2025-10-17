@@ -1,5 +1,4 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
-lib.locale()
 
 -- Performance optimization variables
 local AnimalValidationCache = {}
@@ -33,37 +32,25 @@ CreateThread(function()
         }
     end
     
-    -- Cache locale strings (with safe error handling)
-    local locale_func = nil
+    -- Load locale strings from JSON file
+    local localeData = nil
+    local success, result = pcall(json.decode, LoadResourceFile(GetCurrentResourceName(), 'locales/en.json'))
     
-    -- Try to get locale function safely
-    if lib and lib.locale then
-        local success, result = pcall(lib.locale)
-        if success and type(result) == 'function' then
-            locale_func = result
-        end
-    end
-    
-    -- Load locale strings or use fallbacks
-    if locale_func then
-        local success1, lang1 = pcall(locale_func, 'sv_lang_1')
-        local success2, lang2 = pcall(locale_func, 'sv_lang_2')
-        local success3, lang3 = pcall(locale_func, 'sv_lang_3')
-        local success4, lang4 = pcall(locale_func, 'sv_lang_4')
+    if success and result then
+        localeData = result
+        LocaleCache.lang_1 = localeData['sv_lang_1'] or ' Sold a poor '
+        LocaleCache.lang_2 = localeData['sv_lang_2'] or ' Sold a good '
+        LocaleCache.lang_3 = localeData['sv_lang_3'] or ' Sold a perfect '
+        LocaleCache.lang_4 = localeData['sv_lang_4'] or ' for $'
         
-        LocaleCache.lang_1 = (success1 and lang1) or ' Sold a poor '
-        LocaleCache.lang_2 = (success2 and lang2) or ' Sold a good '
-        LocaleCache.lang_3 = (success3 and lang3) or ' Sold a perfect '
-        LocaleCache.lang_4 = (success4 and lang4) or ' for $'
-        
-        print('[rex-butcher] Locale strings loaded successfully')
+        print('[rex-butcher] Locale strings loaded successfully from en.json')
     else
         -- Fallback locale strings
         LocaleCache.lang_1 = ' Sold a poor '
         LocaleCache.lang_2 = ' Sold a good '
         LocaleCache.lang_3 = ' Sold a perfect '
         LocaleCache.lang_4 = ' for $'
-        print('[rex-butcher] Warning: Locale system not available, using fallback strings')
+        print('[rex-butcher] Warning: Could not load locale file, using fallback strings')
     end
     
     print('[rex-butcher] Server cache initialized with ' .. #Config.Animal .. ' animals')
